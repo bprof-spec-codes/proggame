@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100vh;
+  padding: 0 2em;
+  background-color: #f0f0f0;
+}
+
+.profile-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.task-section {
+  flex: 2;
+  padding: 20px;
+}
