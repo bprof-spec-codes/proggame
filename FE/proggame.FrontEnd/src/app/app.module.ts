@@ -52,5 +52,8 @@ import { UploadComponent } from './shared/components/upload/upload.component';
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent],
+  exports: [
+    TaskListComponent
+  ]
 })
 export class AppModule {}
