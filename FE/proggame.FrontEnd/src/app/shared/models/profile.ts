@@ -1,5 +1,4 @@
-
-export class Profile{
+export class Profile {
   Firstname!: string;
   Lastname!: string;
   Username!: string;

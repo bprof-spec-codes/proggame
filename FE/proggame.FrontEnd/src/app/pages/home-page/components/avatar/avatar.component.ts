@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { UploadedTasksService } from 'src/app/shared/services/uploaded-tasks.service';
 
 interface WindowWithFilePicker extends Window {
   showSaveFilePicker: (options?: any) => Promise<any>;
@@ -13,12 +14,11 @@ declare const window: WindowWithFilePicker;
 export class AvatarComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   uploadedFile: File | null = null;
-  uploadIMG: string =
-    'https://xsgames.co/randomusers/assets/avatars/pixel/32.jpg';
+  uploadIMG: string = '../../../../../assets/images/dnd_avatar.png';
 
   filesToSave: File[] = [];
 
-  constructor() {}
+  constructor(private uploadtaskservice: UploadedTasksService) {}
 
   //#region methods
 
@@ -54,6 +54,7 @@ export class AvatarComponent {
   saveFile() {
     if (this.uploadedFile) {
       this.filesToSave.push(this.uploadedFile);
+      this.uploadtaskservice.addFile(this.uploadedFile.name);
       this.uploadedFile = null; // Clear the uploadedFile after saving
     }
   }

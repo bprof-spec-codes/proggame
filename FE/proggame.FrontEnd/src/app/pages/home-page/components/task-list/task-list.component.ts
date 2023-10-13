@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Task } from 'src/app/shared/models/task';
+import { UploadedTasksService } from 'src/app/shared/services/uploaded-tasks.service';
 
 @Component({
   selector: 'app-task-list',
@@ -9,18 +10,10 @@ import { Task } from 'src/app/shared/models/task';
 export class TaskListComponent {
   tasks: Task[] = [];
 
-  constructor() {
-    for (let i = 1; i <= 5; i++) {
-      let randomTask: Task = {
-        id: i,
-        name: `Task ${i}`,
-        description: `Description for Task ${i}`,
-        difficulty: Math.floor(Math.random() * 3) + 1, // Random difficulty level: 0 for Easy, 1 for Medium, 2 for Hard
-      };
-      this.tasks.push(randomTask);
-    }
+  constructor(private uploadtaskservice: UploadedTasksService) {}
+
+  ngOnInit() {
+    this.tasks = this.uploadtaskservice.getFiles();
     console.log(this.tasks);
   }
-
-  ngOnInit() {}
 }

@@ -1,8 +1,8 @@
-import { Difficulty } from "../enums/difficulty";
+import { Difficulty } from '../enums/difficulty';
 
-export class Task{
-    id!: number;
-    name!: string;
-    description!: string;
-    difficulty!: Difficulty;
+export class Task {
+  id!: number;
+  name!: string;
+  description!: string;
+  difficulty!: Difficulty;
 }
