@@ -1,0 +1,60 @@
+<!--<nav class="navbar navbar-expand-md bg-dark">
+  <a><img class="logo" [src]="navAvatarIMG" alt="image" /> </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavbar"
+  >
+    <span class="navbar-toggler-icon bg-danger"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngFor="let item of routeItems">
+        <a
+          class="nav-link"
+          (click)="routOnClick(item.text)"
+          [routerLink]="item.link"
+          >{{ item.text }}</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="content">
+      <ng-content></ng-content>
+    </div>
+
+    <div class="content-block">
+      <ng-content select="app-footer"></ng-content>
+    </div>
+  </div>
+  <br />
+</nav>
+-->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand"
+    ><img class="logo" [src]="navAvatarIMG" alt="image" />
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavbar"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngFor="let item of routeItems">
+        <a
+          class="nav-link"
+          (click)="routOnClick(item.text)"
+          [routerLink]="item.link"
+          >{{ item.text }}</a
+        >
+      </li>
+    </ul>
+  </div>
+  <br />
+</nav>

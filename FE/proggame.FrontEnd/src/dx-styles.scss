@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0px;
   min-height: 100%;
   height: 100%;
@@ -23,15 +24,31 @@ html, body {
   height: 100%;
   flex-direction: column;
   display: flex;
+  width: 100%;
+  background: rgb(0, 1, 33);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 1, 33, 1) 66%,
+    rgba(8, 8, 9, 0.8463760504201681) 95%
+  );
 }
-
+@media (min-width: 1200px) {
+  .container {
+    max-width: 100%;
+  }
+}
+@media (min-width: 800px) {
+  .container {
+    max-height: 100%;
+  }
+}
 .layout-body {
   flex: 1;
   min-height: 0;
 }
 
 .side-nav-outer-toolbar .dx-drawer {
-  height: calc(100% - 56px)
+  height: calc(100% - 56px);
 }
 
 .content-block {
@@ -61,8 +78,10 @@ html, body {
   border-left: 0;
 }
 
-.with-footer > .dx-scrollable-wrapper >
-.dx-scrollable-container > .dx-scrollable-content {
+.with-footer
+  > .dx-scrollable-wrapper
+  > .dx-scrollable-container
+  > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
