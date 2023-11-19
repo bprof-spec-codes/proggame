@@ -1,14 +1,17 @@
-<div class="container">
-  <div class="profile-section">
-    <div class="avatar">
-      <app-avatar class="left-panel"></app-avatar>
-    </div>
-    <div class="details">
-      <app-profile-details></app-profile-details>
-    </div>
-  </div>
+<h2 class="content-block">Home</h2>
 
-  <div class="task-section">
-    <app-task-list class="right-panel"></app-task-list>
+<div class="content-block">
+  <div class="columns">
+    <div class="col">
+      <div class="dx-card responsive-paddings">
+        <app-avatar></app-avatar>
+        <app-profile-details></app-profile-details>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dx-card responsive-paddings">
+        <app-task-list></app-task-list>
+      </div>
+    </div>
   </div>
 </div>

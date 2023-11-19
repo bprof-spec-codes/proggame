@@ -1,29 +1,12 @@
-<!--<ng-container *ngIf="isAuthenticated(); else unauthenticated">
-  <app-side-nav-inner-toolbar title="{{appInfo.title}}">
+<ng-container *ngIf="isAuthenticated(); else unauthenticated">
+  <app-side-nav-outer-toolbar title="Prog Game">
     <router-outlet></router-outlet>
     <app-footer>
-      Copyright © 2011-{{appInfo.currentYear}} {{appInfo.title}} Inc.
+      Copyright © 2011-{{appInfo.currentYear}} Bprof Spec Inc.
       <br/>
       All trademarks or registered trademarks are property of their respective owners.
     </app-footer>
-  </app-side-nav-inner-toolbar>
-</ng-container>
-
-<ng-template #unauthenticated>
-  <app-unauthenticated-content></app-unauthenticated-content>
-</ng-template>
--->
-<ng-container *ngIf="isAuthenticated(); else unauthenticated">
-  <app-top-nav-toolbar class="navbar"> </app-top-nav-toolbar>
-  <app-side-nav-inner-toolbar>
-    <router-outlet></router-outlet>
-    <app-footer>
-      Copyright © 2011-{{ appInfo.currentYear }} {{ appInfo.title }} Inc.
-      <br />
-      All trademarks or registered trademarks are property of their respective
-      owners.
-    </app-footer>
-  </app-side-nav-inner-toolbar>
+  </app-side-nav-outer-toolbar>
 </ng-container>
 
 <ng-template #unauthenticated>

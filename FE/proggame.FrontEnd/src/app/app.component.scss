@@ -1,23 +1,7 @@
 :host {
   @import "../themes/generated/variables.base.scss";
-  background: rgb(0, 1, 33);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 1, 33, 1) 66%,
-    rgba(8, 8, 9, 0.8463760504201681) 95%
-  );
+  background-color: darken($base-bg, 5.00);
   display: flex;
   height: 100%;
   width: 100%;
-}
-.navbar {
-  width: 100%;
-  margin-bottom: 5em;
-  display: block;
-  position: fixed;
-  z-index: 999;
-}
-
-.body {
-  height: 100%;
 }
