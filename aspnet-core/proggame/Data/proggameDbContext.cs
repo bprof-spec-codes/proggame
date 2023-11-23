@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using proggame.Entities;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
@@ -56,14 +56,14 @@ public class proggameDbContext : AbpDbContext<proggameDbContext>
         });
         builder.Entity<SolutionFile>(tf =>
         {
-            tf.ToTable("AppTests", "dbo");
+            tf.ToTable("AppSolutions", "dbo");
             tf.ConfigureByConvention();
             tf.HasOne<TaskFile>()
                 .WithMany()
                 .HasForeignKey(x => x.TaskId)
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
-            tf.HasOne<IdentityUser<Guid>>()
+            tf.HasOne<IdentityUser>()
                 .WithMany()
                 .HasForeignKey(x => x.CreatorId)
                 .OnDelete(DeleteBehavior.NoAction)

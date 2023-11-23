@@ -6,8 +6,10 @@ namespace proggame.Entities
     public class SolutionFile : Entity<Guid>, ICreationAuditedObject
     {
         public Guid TaskId { get; set; }
-        public DateTime CreationTime => throw new NotImplementedException();
+        public Guid UserId { get; set; }
 
-        public Guid? CreatorId => throw new NotImplementedException();
+        public DateTime CreationTime { get; set; }
+
+        public Guid? CreatorId { get; set; }
     }
 }
