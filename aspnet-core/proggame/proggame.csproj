@@ -96,4 +96,9 @@
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\AppServices\" />
+    <Folder Include="Services\DomainServices\" />
+  </ItemGroup>
+
 </Project>
