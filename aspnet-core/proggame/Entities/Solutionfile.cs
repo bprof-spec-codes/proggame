@@ -1,9 +1,8 @@
 ﻿using Volo.Abp.Auditing;
-using Volo.Abp.Domain.Entities;
 
 namespace proggame.Entities
 {
-    public class SolutionFile : Entity<Guid>, ICreationAuditedObject
+    public class SolutionFile : FileBlob, ICreationAuditedObject
     {
         public Guid TaskId { get; set; }
         public Guid UserId { get; set; }

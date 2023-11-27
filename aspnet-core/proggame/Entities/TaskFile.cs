@@ -2,7 +2,7 @@
 
 namespace proggame.Entities
 {
-    public class TaskFile : Entity<Guid>
+    public class TaskFile : FileBlob
     {
     }
 }
