@@ -6,15 +6,15 @@ namespace proggame.Services.Facades
     {
         public void RunProcessMultiArgs(string file, string[] args)
         {
-
+            throw new NotImplementedException();
         }
-        public void RunProcess(string file, string arg) 
+        public void RunProcess(string file, string arg)
         {
-            
+            throw new NotImplementedException();
         }
         private string GetPath(string path)
         {
-            return string.Empty;
+            throw new NotImplementedException();
         }
     }
 }

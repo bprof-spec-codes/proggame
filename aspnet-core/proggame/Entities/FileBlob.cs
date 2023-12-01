@@ -6,5 +6,10 @@ namespace proggame.Entities
     {
         public string Name { get; set; }
         public byte[] Content { get; set; }
+        public FileBlob(string name, byte[] content)
+        {
+            Name = name;
+            Content = content;
+        }
     }
 }
