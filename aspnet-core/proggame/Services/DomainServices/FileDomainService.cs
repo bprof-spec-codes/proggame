@@ -15,7 +15,7 @@ namespace proggame.Services.DomainServices
         {
             throw new NotImplementedException();
         }
-        public async Task<SolutionFileDto> JoinAsync(SeparatedSolutionFileDto files)
+        public async Task<string> JoinAsync(SeparatedSolutionFileDto files)
         {
             throw new NotImplementedException();
         }
