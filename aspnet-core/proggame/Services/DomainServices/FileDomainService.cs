@@ -1,10 +1,16 @@
 ﻿using proggame.Services.Dtos.SolutionFileDtos;
+using proggame.Services.Facades;
 using Volo.Abp.Domain.Services;
 
 namespace proggame.Services.DomainServices
 {
     public class FileDomainService : IDomainService
     {
+        private readonly IProcessFacade _processFacade;
+        public FileDomainService(IProcessFacade processFacade)
+        {
+            _processFacade = processFacade;
+        }
         public async Task<SeparatedSolutionFileDto> SeparateAsync(CreateUpdateSolutionFileDto slnZip)
         {
             throw new NotImplementedException();

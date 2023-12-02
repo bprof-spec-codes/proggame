@@ -2,7 +2,7 @@
 
 namespace proggame.Services.Facades
 {
-    public class ProcessFacade : ISingletonDependency
+    public class ProcessFacade : ISingletonDependency, IProcessFacade
     {
         public void RunProcessMultiArgs(string file, string[] args)
         {
