@@ -16,21 +16,19 @@ namespace proggame.Services.Facades
                 throw new FileNotFoundException($"The file '{file}' was not found in the PATH.");
             }
 
-            using (Process process = new Process())
+            foreach (var arg in args)
             {
-                process.StartInfo.FileName = filePath;
-
-                
-                process.StartInfo.ArgumentList.Clear();
-                foreach (var arg in args)
+                using (Process process = new Process())
                 {
+                    process.StartInfo.FileName = filePath;
+                    process.StartInfo.ArgumentList.Clear();
                     process.StartInfo.ArgumentList.Add(arg);
+
+                    process.StartInfo.CreateNoWindow = true;
+                    process.Start();
+
+                    process.WaitForExit();
                 }
-
-                process.StartInfo.CreateNoWindow = true;
-                process.Start();
-
-                process.WaitForExit();
             }
         }
 
