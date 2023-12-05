@@ -6,7 +6,7 @@ namespace proggame.Services.DomainServices
     {
         Task<bool> IsPlagiarism(SolutionFileDto solutionFile);
         Task<string> JoinAsync(Guid id);
-        Task<double> RunTestsAsync(SolutionFileDto solutionFile);
+        Task<double> RunTestsAsync(string path);
         Task<SeparatedSolutionFileDto> SeparateAsync(CreateUpdateSolutionFileDto slnZip);
     }
 }

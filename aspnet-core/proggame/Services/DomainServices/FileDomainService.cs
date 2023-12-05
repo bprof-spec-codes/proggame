@@ -20,7 +20,7 @@ namespace proggame.Services.DomainServices
             throw new NotImplementedException();
         }
 
-        public async Task<double> RunTestsAsync(SolutionFileDto solutionFile)
+        public async Task<double> RunTestsAsync(string path)
         {
             throw new NotImplementedException();
         }
