@@ -43,7 +43,7 @@ namespace proggame.Services.AppServices
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<EmptyTaskFileDto>> ReadAllAsync()
+        public async Task<IEnumerable<TaskFileListDto>> ReadAllAsync()
         {
             //visszaadja az összes taskot kontent nélkül
             throw new NotImplementedException();
