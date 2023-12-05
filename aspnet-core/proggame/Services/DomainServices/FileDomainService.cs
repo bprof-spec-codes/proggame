@@ -11,7 +11,7 @@ namespace proggame.Services.DomainServices
         {
             _processFacade = processFacade;
         }
-        public async Task<SeparatedSolutionFileDto> SeparateAsync(CreateUpdateSolutionFileDto slnZip)
+        public async void SeparateAsync(string path)
         {
             throw new NotImplementedException();
         }
