@@ -19,7 +19,14 @@ namespace proggame.Services.Facades
             using (Process process = new Process())
             {
                 process.StartInfo.FileName = filePath;
-                process.StartInfo.Arguments = string.Join(" ", args);
+
+                
+                process.StartInfo.ArgumentList.Clear();
+                foreach (var arg in args)
+                {
+                    process.StartInfo.ArgumentList.Add(arg);
+                }
+
                 process.StartInfo.CreateNoWindow = true;
                 process.Start();
 
