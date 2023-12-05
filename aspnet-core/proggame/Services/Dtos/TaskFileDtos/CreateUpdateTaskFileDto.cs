@@ -8,5 +8,7 @@ namespace proggame.Services.Dtos.TaskFileDtos
         public string Name { get; set; }
         [Required]
         public byte[] Content { get; set; }
+        [Required]
+        public string Description { get; set; }
     }
 }

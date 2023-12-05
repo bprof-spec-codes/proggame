@@ -12,12 +12,12 @@ namespace proggame.Services.AppServices
 {
     public class TaskFileAppService : ApplicationService
     {
-        private readonly FileDomainService _fileService;
+        private readonly IFileDomainService _fileService;
         private readonly IRepository<TaskFile, Guid> _taskFileRepository;
         private readonly IRepository<TestFile, Guid> _testFileRepository;
 
         public TaskFileAppService(
-            FileDomainService fileService,
+            IFileDomainService fileService,
             IRepository<TaskFile, Guid> taskFileRepository,
             IRepository<TestFile, Guid> testFileRepository)
         {

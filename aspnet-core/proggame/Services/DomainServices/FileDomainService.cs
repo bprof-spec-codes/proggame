@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Services;
 
 namespace proggame.Services.DomainServices
 {
-    public class FileDomainService : IDomainService
+    public class FileDomainService : IDomainService, IFileDomainService
     {
         private readonly IProcessFacade _processFacade;
         public FileDomainService(IProcessFacade processFacade)
@@ -15,7 +15,7 @@ namespace proggame.Services.DomainServices
         {
             throw new NotImplementedException();
         }
-        public async Task<string> JoinAsync(SeparatedSolutionFileDto files)
+        public async Task<string> JoinAsync(Guid id)
         {
             throw new NotImplementedException();
         }

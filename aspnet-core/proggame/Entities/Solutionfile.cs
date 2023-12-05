@@ -6,7 +6,7 @@ namespace proggame.Entities
     {
         public Guid TaskId { get; set; }
         public Guid UserId { get; set; }
-
+        public double Point { get; set; }
         public DateTime CreationTime { get; set; }
 
         public Guid? CreatorId { get; set; }
