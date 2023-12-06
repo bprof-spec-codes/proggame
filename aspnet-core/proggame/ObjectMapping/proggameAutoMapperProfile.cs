@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using proggame.Entities;
+using proggame.Services.Dtos.TestFileDtos;
 
 namespace proggame.ObjectMapping;
 
@@ -6,6 +8,7 @@ public class proggameAutoMapperProfile : Profile
 {
     public proggameAutoMapperProfile()
     {
-        /* Create your AutoMapper object mappings here */
+        CreateMap<TestFile, TestFileDto>();
+        CreateMap<TestFileDto, TestFile>();
     }
 }
