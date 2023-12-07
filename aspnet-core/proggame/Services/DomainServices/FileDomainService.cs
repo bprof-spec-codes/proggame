@@ -5,6 +5,7 @@ using proggame.Services.Dtos.SolutionFileDtos;
 using proggame.Services.Dtos.TestFileDtos;
 using proggame.Services.Facades;
 using System.IO.Compression;
+using System.Text;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 
@@ -30,9 +31,6 @@ namespace proggame.Services.DomainServices
 
         public async Task<string> JoinAsync(SolutionFileDto files)
         {
-            //var id = new Guid(files.Task.Id);
-            //var tests = await testFileReposity.GetListAsync(x => x.Id == id);
-
             string folderPath = $"C:\\Temp\\proggame\\{files.Name}";
 
             if (!Directory.Exists(folderPath))
@@ -42,18 +40,26 @@ namespace proggame.Services.DomainServices
 
             File.WriteAllBytes($"{folderPath}\\{files.Name}", Unzip(files.Content));
 
-            
+            Guid key = new Guid();
 
-
-            if (!Directory.Exists(folderPath))
+            if (ContainsSLNSignature(files.Content))
             {
-                Directory.CreateDirectory(folderPath);
+                int slnIndex = Array.IndexOf(files.Content, Encoding.UTF8.GetBytes("Microsoft Visual Studio Solution File,"));
+                if (slnIndex >= 0)
+                {
+                    string slnContent = Encoding.UTF8.GetString(files.Content, slnIndex, files.Content.Length - slnIndex);
+                    string firstLine = slnContent.Substring(0, slnContent.IndexOf('\n'));
+
+                    key = new Guid(firstLine);
+                }
             }
 
-            //foreach (var item in files.Tests)
-            //{
-            //    File.WriteAllBytes($"{folderPath}\\{item.Name}", item.Content);
-            //}
+            var tests = await testFileReposity.GetListAsync(x => x.Id == key);
+
+            foreach (var item in tests)
+            {
+                File.WriteAllBytes($"{folderPath}\\{item.Name}", item.Content);
+            }
 
             _processFacade.RunProcess("", "dotnet.exe");
 
@@ -89,6 +95,12 @@ namespace proggame.Services.DomainServices
 
                 return decompressedStream.ToArray();
             }
+        }
+
+        static bool ContainsSLNSignature(byte[] bytes)
+        {
+            byte[] slnSignature = Encoding.UTF8.GetBytes("Microsoft Visual Studio Solution File,");
+            return Array.IndexOf(bytes, slnSignature) != -1;
         }
     }
 }
