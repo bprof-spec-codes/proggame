@@ -29,3 +29,15 @@
   }
 
 }
+
+lpx-nav {
+  background-color: #EC460C;
+}
+.lpx-nav-menu .lpx-menu-item-link.selected > lpx-icon , 
+.lpx-breadcrumb-item,
+.lpx-breadcrumb-item > lpx-icon,
+.bi-globe,
+.lpx-nav-menu .lpx-menu-item-link:hover > lpx-icon,
+.lpx-nav-menu .lpx-menu-item-link:hover {
+  color: #EC460C !important;
+}

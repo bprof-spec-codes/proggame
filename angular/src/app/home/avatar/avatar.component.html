@@ -1,0 +1,30 @@
+<div class="content">
+    <div
+      class="drop-zone"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onFileDropped($event)"
+    >
+      <div class="square">
+        <p>
+          <a><img [src]="uploadIMG" alt="image" /> </a>
+        </p>
+      </div>
+    </div>
+    <input
+      type="file"
+      accept=".zip"
+      (change)="onFileSelected($event)"
+      #fileInput
+      hidden
+    />
+    <button (click)="saveFile()" [disabled]="!uploadedFile">Save</button>
+  
+    <p *ngIf="filesToSave.length > 0">Saved Files:</p>
+    <ul *ngIf="filesToSave.length > 0">
+      <li *ngFor="let file of filesToSave">
+        <a (click)="downloadFile(file)">{{ file.name }}</a>
+      </li>
+    </ul>
+  </div>
+  

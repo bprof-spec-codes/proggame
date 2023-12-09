@@ -15,6 +15,34 @@ function configureRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/task-list',
+        name: '::Tasks',
+        iconClass: 'fas fa-list',
+        order: 2,
+        layout: eLayoutType.application,
+      },
+      {
+        path: '/profile',
+        name: '::Account',
+        iconClass: 'fas fa-user',
+        order: 3,
+        layout: eLayoutType.application,
+      },
+      {
+        path: '/shop',
+        name: '::Points Shop',
+        iconClass: 'fas fa-cart-plus',
+        order: 4,
+        layout: eLayoutType.application,
+      },
+      {
+        path: '/task-upload',
+        name: '::Upload Task',
+        iconClass: 'fas fa-plus',
+        order: 5,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

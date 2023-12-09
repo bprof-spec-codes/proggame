@@ -1,0 +1,93 @@
+$primary-color: #0E8D9B; // Teal
+$secondary-color: #EC460C; // Orange
+$background-color: #1A1A1A; // Dark Background
+$light-text: #ffffff; // White
+$dark-text: #333333; // Dark Text
+
+// Mixins for button and card styling with hover effects
+@mixin button-styles($bg-color, $text-color) {
+  padding: 0.75em 1.5em;
+  border: 2px solid $bg-color;
+  background-color: transparent;
+  color: $text-color;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $bg-color;
+    color: $background-color;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px lighten($bg-color, 20%);
+  }
+}
+
+@mixin card-styles {
+  background: $background-color;
+  border-left: 5px solid $secondary-color;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba($dark-text, 0.1);
+  padding: 2em;
+  margin: 1em 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba($dark-text, 0.2);
+  }
+}
+
+// Task Upload styles
+.task-upload {
+  background: $background-color;
+  padding: 2em;
+  color: $light-text;
+  text-align: center;
+
+  h2 {
+    color: $secondary-color;
+    margin-bottom: 1em;
+  }
+
+  .form-group {
+    margin-bottom: 1em;
+    text-align: left;
+
+    label {
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5em;
+      border-radius: 4px;
+      border: 1px solid $light-text;
+      background-color: lighten($background-color, 5%);
+      color: $light-text;
+
+      &:focus {
+        outline: none;
+        border-color: $secondary-color;
+        box-shadow: 0 0 0 3px rgba($secondary-color, 0.25);
+      }
+    }
+
+    .form-control-file {
+      border: none;
+      margin-top: 0.5em;
+    }
+  }
+
+  .submit-button {
+    @include button-styles($secondary-color, $light-text);
+    padding: 0.5em 2em;
+    font-size: 1em;
+    margin-top: 1em;
+  }
+}
