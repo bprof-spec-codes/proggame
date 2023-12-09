@@ -20,7 +20,14 @@ namespace proggame.Services.DomainServices
             _processFacade = processFacade;
         }
 
-       
+        public async void SeparateAsync(string path)
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<string> JoinAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
         public async Task<double> RunTestsAsync(SolutionFileDto solutionFile)
         /// This method is responsible for running tests on a solution file. It performs the following steps:
         /// 1. Creates a temporary directory for unpacking the .zip file.
