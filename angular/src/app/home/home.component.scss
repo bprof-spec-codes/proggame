@@ -1,0 +1,338 @@
+/*.columns {
+    display: flex;
+    flex-direction: row;
+    > :nth-child(1){
+      flex: 1 1 30%;
+    }
+  
+    > :nth-child(2){
+      flex: 1 1 70%;
+    }
+  }
+  
+  @media only screen and (max-width: 1100px) {
+    .columns {
+      flex-direction: column;
+    }
+  }
+
+ 
+ 
+ $primary-color: #4b0082; // Dark Purple
+ $secondary-color: #3d3d5c; // Secondary Dark
+ $accent-color: #7c7c8c; // Light Purple
+ $dark-text: #f5f5f5; // Almost White
+ $light-text: #ffffff; // White
+ $detail-color: #e0e0e0; // Light Grey for borders and shadows
+ 
+ // Mixins for modern button and card styling
+ @mixin button-styles($bg-color, $text-color) {
+   padding: 0.75em 1.5em;
+   border: none;
+   background-color: $bg-color;
+   color: $text-color;
+   cursor: pointer;
+   border-radius: 3px;
+   font-weight: bold;
+   text-transform: uppercase;
+   transition: all 0.3s ease;
+ 
+   &:hover {
+     background-color: lighten($bg-color, 10%);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   }
+ 
+   &:focus {
+     outline: none;
+     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+   }
+ }
+ 
+ @mixin card-styles {
+   background: $secondary-color;
+   border-radius: 8px;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+   padding: 2em;
+   margin: 1em;
+   transition: box-shadow 0.3s ease;
+ 
+   &:hover {
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+   }
+ }
+ 
+ // Base styling
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+ 
+ body {
+   font-family: 'Segoe UI', 'Roboto', sans-serif;
+   background-color: $primary-color;
+   color: $dark-text;
+   line-height: 1.6;
+ }
+ 
+ // Hero section
+ .hero {
+  @include card-styles;
+   background: linear-gradient(to right bottom, $primary-color, darken($primary-color, 15%));
+   color: $light-text;
+   text-align: center;
+   padding: 4em 1em;
+ 
+   h1 {
+     font-size: 3em;
+   }
+ 
+   p {
+     font-size: 1.25em;
+     margin: 0.5em 0 1.5em;
+   }
+ 
+   .cta-buttons {
+     button {
+       @include button-styles($accent-color, $dark-text);
+       margin: 0 0.5em;
+     }
+   }
+ }
+ 
+ // How it works section
+ .how-it-works {
+   @include card-styles;
+   text-align: center;
+   color: $light-text;
+
+   h2 {
+     font-size: 2.25em;
+   }
+ 
+   ol {
+     list-style: none;
+     counter-reset: step-counter;
+     margin: 2em 0;
+ 
+     li {
+       counter-increment: step-counter;
+       font-size: 1.25em;
+       position: relative;
+       padding-left: 2.5em;
+       margin-bottom: 1em;
+ 
+       &::before {
+         content: counter(step-counter);
+         position: absolute;
+         left: 0;
+         background-color: $accent-color;
+         border-radius: 50%;
+         width: 2em;
+         height: 2em;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-weight: bold;
+       }
+     }
+   }
+ }
+ 
+ // Rewards section
+ .rewards {
+  @include card-styles;
+   background-color: darken($primary-color, 10%);
+   color: $light-text;
+   text-align: center;
+   padding: 3em 1em;
+ 
+   h2 {
+     font-size: 2.25em;
+     margin-bottom: 1em;
+   }
+ 
+   p {
+     font-size: 1.25em;
+   }
+ }
+ 
+ // Featured tasks section
+ .featured-tasks {
+   @include card-styles;
+   text-align: center;
+   color: $light-text;
+ 
+   h2 {
+     font-size: 2.25em;
+     margin-bottom: 1em;
+   }
+ 
+   .task-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     gap: 1em;
+   }
+ }
+
+ */
+
+ $primary-color: #0E8D9B; // Teal
+$secondary-color: #EC460C; // Orange
+$background-color: #1A1A1A; // Dark Background
+$light-text: #ffffff; // White
+$dark-text: #333333; // Dark Text
+
+// Mixins for button and card styling with hover effects
+@mixin button-styles($bg-color, $text-color) {
+  padding: 0.75em 1.5em;
+  border: 2px solid $bg-color;
+  background-color: transparent;
+  color: $text-color;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $bg-color;
+    color: $background-color;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px lighten($bg-color, 20%);
+  }
+}
+
+@mixin card-styles {
+  background: $background-color;
+  border-left: 5px solid $secondary-color;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba($dark-text, 0.1);
+  padding: 2em;
+  margin: 1em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba($dark-text, 0.2);
+  }
+}
+
+// Base styling
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  background-color: $background-color;
+  color: $light-text;
+  line-height: 1.6;
+}
+
+// Hero section
+.hero {
+  @include card-styles;
+  background: linear-gradient(to right, lighten($primary-color, 10%), $primary-color);
+  color: $light-text;
+  text-align: center;
+  padding: 4em 1em;
+
+  h1 {
+    font-size: 3em;
+  }
+
+  p {
+    font-size: 1.25em;
+    margin: 0.5em 0 1.5em;
+  }
+
+  .cta-buttons {
+    button {
+      @include button-styles($secondary-color, $light-text);
+      margin: 0 0.5em;
+    }
+  }
+}
+
+// How it works section
+.how-it-works {
+  @include card-styles;
+  text-align: center;
+
+  h2 {
+    color: $secondary-color;
+    font-size: 2.25em;
+  }
+
+  ol {
+    list-style: none;
+    counter-reset: step-counter;
+    margin: 2em 0;
+
+    li {
+      counter-increment: step-counter;
+      font-size: 1.25em;
+      position: relative;
+      padding-left: 2.5em;
+      margin-bottom: 1em;
+      color: $light-text;
+
+      &::before {
+        content: counter(step-counter);
+        position: absolute;
+        left: 0;
+        background-color: $secondary-color;
+        color: $background-color;
+        border-radius: 50%;
+        width: 2em;
+        height: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Rewards section
+.rewards {
+  @include card-styles;
+  background-color: $primary-color;
+  color: $light-text;
+  text-align: center;
+  padding: 3em 1em;
+
+  h2 {
+    font-size: 2.25em;
+    margin-bottom: 1em;
+  }
+
+  p {
+    font-size: 1.25em;
+  }
+}
+
+// Featured tasks section
+.featured-tasks {
+  @include card-styles;
+  text-align: center;
+
+  h2 {
+    color: $secondary-color;
+    font-size: 2.25em;
+    margin-bottom: 1em;
+  }
+
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1em;
+  }
+}

@@ -1,0 +1,20 @@
+<!-- Task Upload Section -->
+<section class="task-upload">
+    <h2>Upload a Task</h2>
+    <form>
+      <div class="form-group">
+        <label for="taskName">Task Name</label>
+        <input type="text" id="taskName" name="taskName" ngModel required class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="taskDescription">Description</label>
+        <textarea id="taskDescription" name="taskDescription" rows="4" ngModel required class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="taskFile">Task File (.zip)</label>
+        <input type="file" id="taskFile" name="taskFile" accept=".zip" ngModel required class="form-control-file">
+      </div>
+      <button type="submit" [disabled]="!taskForm.valid" class="submit-button">Upload Task</button>
+    </form>
+  </section>
+  
