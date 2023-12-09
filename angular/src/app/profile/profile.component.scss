@@ -69,10 +69,8 @@ $dark-text: #333333; // Dark Text
 
     .user-avatar {
       img {
-        width: 100px; // Adjust as needed
-        height: 100px; // Adjust as needed
-        border-radius: 50%;
-        border: 2px solid $secondary-color;
+        width: 200px;
+        height: 200px; 
       }
     }
   }

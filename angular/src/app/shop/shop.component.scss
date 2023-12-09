@@ -78,6 +78,8 @@ $dark-text: #333333; // Dark Text
         width: 100px; // Adjust as needed
         height: 100px; // Adjust as needed
         margin-bottom: 0.5em;
+        border: 3px solid $primary-color;
+        border-radius: 25px;
       }
 
       .badge-name {

@@ -19,6 +19,7 @@ import { AbpOAuthModule } from '@abp/ng.oauth';
 import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -40,6 +41,7 @@ import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
               ThemeLeptonXModule.forRoot(),
               SideMenuLayoutModule.forRoot(),
               AccountLayoutModule.forRoot(),
+
   ],
   declarations: [AppComponent],
   providers: [APP_ROUTE_PROVIDER],

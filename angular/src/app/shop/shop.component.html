@@ -5,15 +5,13 @@
       <p>Your Points: <strong>1200</strong></p>
     </div>
     <div class="badge-shop-grid">
-      <!-- Dynamically create badge elements here -->
-      <!-- Example Badge for Shop -->
-      <div class="badge-item">
-        <img src="path-to-badge-image.jpg" alt="Badge Name" class="badge-image">
-        <p class="badge-name">Badge Name</p>
-        <p class="badge-price">Price: 300 Points</p>
-        <button class="buy-badge-button">Purchase</button>
+      <!-- Iterate over badges array -->
+      <div class="badge-item" *ngFor="let badge of badges">
+        <img [src]="badge.imagePath" [alt]="badge.name" class="badge-image">
+        <p class="badge-name">{{ badge.name }}</p>
+        <p class="badge-price">Price: {{ badge.price }} Points</p>
+        <button class="buy-badge-button" (click)="purchaseBadge(badge.id)">Purchase</button>
       </div>
-      <!-- Repeat for other badges -->
     </div>
   </section>
   
