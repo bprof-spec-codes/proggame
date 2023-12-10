@@ -39,7 +39,9 @@ namespace proggame.Services.DomainServices
                 Directory.CreateDirectory(folderPath);
             }
 
-            File.WriteAllBytes($"{folderPath}\\{entity.Name}", Unzip(entity.Content));
+            File.WriteAllBytes($"{folderPath}", entity.Content);
+
+            ZipFile.ExtractToDirectory($"{folderPath}\\{entity.Name}", $"{folderPath}\\{entity.Name}");
 
             //Guid key = new Guid();
 
@@ -59,7 +61,8 @@ namespace proggame.Services.DomainServices
 
             foreach (var item in tests)
             {
-                File.WriteAllBytes($"{folderPath}\\{item.Name}", Unzip(item.Content));
+                File.WriteAllBytes($"{folderPath}\\{item.Name}", item.Content);
+                ZipFile.ExtractToDirectory($"{folderPath}\\{item.Name}", $"{folderPath}\\{item.Name}");
             }
 
             _processFacade.RunProcess("", "dotnet.exe");
@@ -77,31 +80,6 @@ namespace proggame.Services.DomainServices
         {
             throw new NotImplementedException();
         }
-
-        static byte[] Unzip(byte[] compressedBytes)
-        {
-            using (MemoryStream compressedStream = new MemoryStream(compressedBytes))
-            using (MemoryStream decompressedStream = new MemoryStream())
-            {
-                using (ZipArchive archive = new ZipArchive(compressedStream, ZipArchiveMode.Read))
-                {
-                    foreach (ZipArchiveEntry entry in archive.Entries)
-                    {
-                        using (Stream entryStream = entry.Open())
-                        {
-                            entryStream.CopyTo(decompressedStream);
-                        }
-                    }
-                }
-
-                return decompressedStream.ToArray();
-            }
-        }
-
-        static bool ContainsSLNSignature(byte[] bytes)
-        {
-            byte[] slnSignature = Encoding.UTF8.GetBytes("Microsoft Visual Studio Solution File,");
-            return Array.IndexOf(bytes, slnSignature) != -1;
-        }
     }
 }
+
