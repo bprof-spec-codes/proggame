@@ -65,7 +65,7 @@ namespace proggame.Services.DomainServices
                 ZipFile.ExtractToDirectory($"{folderPath}\\{item.Name}", $"{folderPath}\\{item.Name}");
             }
 
-            _processFacade.RunProcess("", "dotnet.exe");
+            _processFacade.RunProcess("sln add", "<.csproj path>");
 
             return folderPath;
         }
