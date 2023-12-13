@@ -43,20 +43,6 @@ namespace proggame.Services.DomainServices
 
             ZipFile.ExtractToDirectory($"{folderPath}\\{entity.Name}", $"{folderPath}\\{entity.Name}");
 
-            //Guid key = new Guid();
-
-            //if (ContainsSLNSignature(files.Content))
-            //{
-            //    int slnIndex = Array.IndexOf(files.Content, Encoding.UTF8.GetBytes("Microsoft Visual Studio Solution File,"));
-            //    if (slnIndex >= 0)
-            //    {
-            //        string slnContent = Encoding.UTF8.GetString(files.Content, slnIndex, files.Content.Length - slnIndex);
-            //        string firstLine = slnContent.Substring(0, slnContent.IndexOf('\n'));
-
-            //        key = new Guid(firstLine);
-            //    }
-            //}
-
             var tests = await testFileReposity.GetListAsync(x => x.TaskId == entity.TaskId);
 
             foreach (var item in tests)
