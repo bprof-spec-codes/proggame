@@ -8,13 +8,10 @@ using AutoMapper;
 using proggame.Entities;
 using proggame.Services.Dtos.SolutionFileDtos;
 using proggame.Services.Facades;
-using System.IO.Compression;
 using System.Text;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
-using proggame.Services.Facades;
-using proggame.Services.Dtos.SolutionFileDtos;
 using Microsoft.CodeAnalysis;
 
 namespace proggame.Services.DomainServices
@@ -22,14 +19,12 @@ namespace proggame.Services.DomainServices
     public class FileDomainService : IDomainService, IFileDomainService
     {
         private readonly IProcessFacade _processFacade;
-        private readonly IMapper mapper;
         private readonly IRepository<TestFile> testFileReposity;
         private readonly IRepository<SolutionFile> solutionFileRepository;
 
-        public FileDomainService(IProcessFacade processFacade, IMapper mapper, IRepository<TestFile> testFileReposity, IRepository<SolutionFile> solutionFileRepository)
+        public FileDomainService(IProcessFacade processFacade, IRepository<TestFile> testFileReposity, IRepository<SolutionFile> solutionFileRepository)
         {
             _processFacade = processFacade ?? throw new ArgumentNullException(nameof(processFacade));
-            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             this.testFileReposity = testFileReposity ?? throw new ArgumentNullException(nameof(testFileReposity));
             this.solutionFileRepository = solutionFileRepository ?? throw new ArgumentNullException(nameof(solutionFileRepository));
         }
@@ -139,6 +134,11 @@ namespace proggame.Services.DomainServices
                 return compilationResult.Success;
             }
         }
- }
+
+        public Task<bool> IsPlagiarism(SolutionFileDto solutionFile)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
