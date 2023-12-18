@@ -1,8 +1,11 @@
-﻿using proggame.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using proggame.Data;
+using proggame.Entities;
 using proggame.Services.DomainServices;
 using proggame.Services.Dtos.SolutionFileDtos;
 using proggame.Services.Dtos.TaskFileDtos;
 using Scriban.Runtime.Accessors;
+using System.Linq.Expressions;
 using System.IO.Compression;
 using Volo.Abp.Application.Services;
 using Volo.Abp.DependencyInjection;
@@ -14,15 +17,22 @@ namespace proggame.Services.AppServices
     public class TaskFileAppService : ApplicationService
     {
         private readonly IFileDomainService _fileService;
+        private readonly IRepository<SolutionFile, Guid> _solutionFileReporitoy;
         private readonly IRepository<TaskFile, Guid> _taskFileRepository;
         private readonly IRepository<TestFile, Guid> _testFileRepository;
-
+        private readonly proggameDbContext _context;
         public TaskFileAppService(
             IFileDomainService fileService,
+            IRepository<SolutionFile, Guid> solutionFileReporitoy,
             IRepository<TaskFile, Guid> taskFileRepository,
-            IRepository<TestFile, Guid> testFileRepository)
+            IRepository<TestFile, Guid> testFileRepository,
+            SolutionFileAppService solutionFileAppService,
+            proggameDbContext context)
+
+
         {
             _fileService = fileService;
+            _solutionFileReporitoy = solutionFileReporitoy;
             _taskFileRepository = taskFileRepository;
             _testFileRepository = testFileRepository;
         }
@@ -59,6 +69,7 @@ namespace proggame.Services.AppServices
             foreach(TestFile file in files) _testFileRepository.InsertAsync(file, true);
             Results.Ok();
         }
+
 
         public async Task DeleteEmptySolutionAsync(Guid id)
         {

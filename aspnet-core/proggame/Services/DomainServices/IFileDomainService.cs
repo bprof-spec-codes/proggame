@@ -1,4 +1,5 @@
-﻿using proggame.Services.Dtos.SolutionFileDtos;
+﻿using proggame.Services.Dtos.SeparatedFilesDto;
+using proggame.Services.Dtos.SolutionFileDtos;
 
 namespace proggame.Services.DomainServices
 {
