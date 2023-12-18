@@ -8,6 +8,7 @@ using Volo.Abp.Domain.Services;
 using proggame.Services.Facades;
 using proggame.Services.Dtos.SolutionFileDtos;
 using Microsoft.CodeAnalysis;
+using System.Xml.Linq;
 
 namespace proggame.Services.DomainServices
 {
@@ -21,7 +22,19 @@ namespace proggame.Services.DomainServices
         }
         public async void SeparateAsync(string path)
         {
-            throw new NotImplementedException();
+            string slnPath = GetFileWithExtension(path, "sln");
+            List<string> projectPaths = GetFilesWithExtension(path, "csproj");
+            foreach (string projectPath in projectPaths)
+            {
+                if (IsTestProject(projectPath))
+                {
+                    _processFacade.RunProcess("dotnet.exe", "sln " + slnPath + " remove " + projectPath);
+                    string dir = Path.GetDirectoryName(projectPath);
+                    string zipPath = Path.Combine(path, dir + ".zip");
+                    ZipFile.CreateFromDirectory(projectPath, zipPath);
+                    Directory.Delete(projectPath, true);
+                }
+            }
         }
         public async Task<string> JoinAsync(Guid id)
         {
@@ -102,5 +115,40 @@ namespace proggame.Services.DomainServices
                 return compilationResult.Success;
             }
         }
- }
+
+        private string GetFileWithExtension(string dir, string extension)
+        {
+            return Directory
+                .EnumerateFiles(dir, "*." + extension, SearchOption.AllDirectories)
+                .ToList()
+                .FirstOrDefault();
+        }
+        private List<string> GetFilesWithExtension(string dir, string extension)
+        {
+            return Directory
+                .EnumerateFiles(dir, "*." + extension, SearchOption.AllDirectories)
+                .ToList();
+        }
+        private bool IsTestProject(string path)
+        {
+            XDocument projDef = XDocument.Load(path);
+            IEnumerable<string> nodes = projDef
+                .Element("Project")
+                .Elements("ItemGroup")
+                .Elements("PackageReference")
+                .Attributes("Include")
+                .Select(x => x.Value);
+            return nodes.Contains("NUnit");
+        }
+
+        public Task<bool> IsPlagiarism(SolutionFileDto solutionFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> UnzipByteAsync(string path, byte[] content)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
