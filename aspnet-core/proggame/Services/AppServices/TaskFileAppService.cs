@@ -63,7 +63,13 @@ namespace proggame.Services.AppServices
         public async Task<TaskFileDto> ReadAsync(Guid id)
         {
             //visszaad egy üres Taskot kontenttel
-            throw new NotImplementedException();
+            TaskFile task = await _taskFileRepository.GetAsync(id);
+            TaskFileDto result = new TaskFileDto()
+            {
+                Content = task.Content,
+                Name = task.Name
+            };
+            return result;
         }
     }
 }
