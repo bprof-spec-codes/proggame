@@ -1,4 +1,5 @@
-﻿using proggame.Services.Dtos.SolutionFileDtos;
+﻿using proggame.Services.Dtos.SeparatedFilesDto;
+using proggame.Services.Dtos.SolutionFileDtos;
 
 namespace proggame.Services.DomainServices
 {
@@ -9,5 +10,6 @@ namespace proggame.Services.DomainServices
         Task<double> RunTestsAsync(SolutionFileDto solutionFile);
         void SeparateAsync(string path);
         Task<string> UnzipByteAsync(string path, byte[] content);
+        string GetFileWithExtension(string dir, string extension);
     }
 }

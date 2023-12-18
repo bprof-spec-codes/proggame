@@ -1,14 +1,16 @@
-﻿using Volo.Abp.Domain.Entities;
+﻿    using Volo.Abp.Domain.Entities;
 
-namespace proggame.Entities
-{
-    public class TestFile : FileBlob
+    namespace proggame.Entities
     {
-        public TestFile(string name, byte[] content, Guid taskId) : base(name, content)
+        public class TestFile : FileBlob
         {
-            TaskId = taskId;
-        }
+            public TestFile(string name, byte[] content, Guid taskId) : base(name, content)
+            {
+                TaskId = taskId;
+            }
 
-        public Guid TaskId { get; set; }
+            public Guid TaskId { get; set; }
+            public TaskFile Task { get; set; } // Új mező a kapcsolódó entitás tárolásához
+
     }
 }
