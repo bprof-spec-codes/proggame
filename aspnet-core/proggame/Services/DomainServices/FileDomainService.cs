@@ -4,9 +4,14 @@ using System.Reflection;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp;
 using proggame.Services.Dtos;
-using Volo.Abp.Domain.Services;
-using proggame.Services.Facades;
+using AutoMapper;
+using proggame.Entities;
 using proggame.Services.Dtos.SolutionFileDtos;
+using proggame.Services.Facades;
+using System.Text;
+using Volo.Abp.Application.Services;
+using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Domain.Services;
 using Microsoft.CodeAnalysis;
 using System.Xml.Linq;
 
@@ -15,12 +20,16 @@ namespace proggame.Services.DomainServices
     public class FileDomainService : IDomainService, IFileDomainService
     {
         private readonly IProcessFacade _processFacade;
-
-        public FileDomainService(IProcessFacade processFacade)
+        private readonly IRepository<SolutionFile, Guid> _solutionRepository;
+        private readonly IRepository<TestFile, Guid> _testRepository;
+        public FileDomainService(
+            IProcessFacade processFacade,
+            IRepository<SolutionFile, Guid> solutionRepository)
         {
             _processFacade = processFacade;
+            _solutionRepository = solutionRepository;
         }
-        public async void SeparateAsync(string path)
+        public void SeparateAsync(string path)
         {
             string slnPath = GetFileWithExtension(path, "sln");
             List<string> projectPaths = GetFilesWithExtension(path, "csproj");
@@ -38,7 +47,19 @@ namespace proggame.Services.DomainServices
         }
         public async Task<string> JoinAsync(Guid id)
         {
-            throw new NotImplementedException();
+            SolutionFile solution = await _solutionRepository.GetAsync(id);
+            string dir = $"C:\\Temp\\proggame\\{id}";
+            string slnZip = Path.Combine(dir, solution.Name);
+            List<TestFile> tests = _testRepository.GetDbSet().Where(x => x.TaskId == solution.TaskId).ToList();
+            Directory.CreateDirectory(dir);
+            string slnDir = await UnzipByteAsync(slnZip, solution.Content);
+            string slnPath = GetFileWithExtension(slnDir, "sln");
+            foreach (TestFile test in tests)
+            {
+                string testDir = await UnzipByteAsync(Path.Combine(slnDir, test.Name), test.Content);
+                _processFacade.RunProcess("dotnet.exe", "sln " + slnPath + " add " + GetFileWithExtension(testDir, "csproj"));
+            }
+            return slnDir;
         }
         public async Task<double> RunTestsAsync(SolutionFileDto solutionFile)
         /// This method is responsible for running tests on a solution file. It performs the following steps:
@@ -146,9 +167,14 @@ namespace proggame.Services.DomainServices
             throw new NotImplementedException();
         }
 
-        public Task<string> UnzipByteAsync(string path, byte[] content)
+        public async Task<string> UnzipByteAsync(string path, byte[] content)
         {
-            throw new NotImplementedException();
+            string dir = path.Replace(".zip", "");
+            await File.WriteAllBytesAsync(path, content);
+            ZipFile.ExtractToDirectory(dir, path);
+            File.Delete(path);
+            return dir;
         }
     }
 }
+
