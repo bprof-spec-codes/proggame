@@ -137,7 +137,7 @@ namespace proggame.Services.DomainServices
             }
         }
 
-        private string GetFileWithExtension(string dir, string extension)
+        public string GetFileWithExtension(string dir, string extension)
         {
             return Directory
                 .EnumerateFiles(dir, "*." + extension, SearchOption.AllDirectories)

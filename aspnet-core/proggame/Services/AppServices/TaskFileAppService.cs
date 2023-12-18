@@ -3,6 +3,7 @@ using proggame.Services.DomainServices;
 using proggame.Services.Dtos.SolutionFileDtos;
 using proggame.Services.Dtos.TaskFileDtos;
 using Scriban.Runtime.Accessors;
+using System.IO.Compression;
 using Volo.Abp.Application.Services;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
@@ -25,7 +26,7 @@ namespace proggame.Services.AppServices
             _taskFileRepository = taskFileRepository;
             _testFileRepository = testFileRepository;
         }
-        public async Task<TaskFile> UploadEmptySolutionAsync(TaskFileDto input)
+        public async Task UploadEmptySolutionAsync(TaskFileDto input)
         {
             /*                           \
             kizippeli,                    \
@@ -34,7 +35,29 @@ namespace proggame.Services.AppServices
             beleírja az SLN file elejébe,/
             bezippeli a külön fileokat és eltárolja a db-ben
             */
-            throw new NotImplementedException();
+            string path = await _fileService.UnzipByteAsync(input.Name, input.Content);
+            _fileService.SeparateAsync(path);
+            Guid id = Guid.NewGuid();
+            string slnPath = _fileService.GetFileWithExtension(path, "sln");
+            string[] lines = File.ReadAllLines(slnPath);
+            StreamWriter sw = new StreamWriter(path);
+            sw.WriteLine(id);
+            foreach (string line in lines) sw.WriteLine(line);
+            sw.Close();
+            string[] zips = Directory.GetFiles(path, "*.zip", SearchOption.TopDirectoryOnly);
+            List<TestFile> files = new List<TestFile>();
+            foreach (string zip in zips)
+            {
+                files.Add(new TestFile(Path.GetFileName(zip), File.ReadAllBytes(zip), id));
+                File.Delete(zip);
+            }
+            string zipPath = path + ".zip";
+            ZipFile.CreateFromDirectory(path, zipPath);
+            TaskFile task = new TaskFile(Path.GetFileName(zipPath), File.ReadAllBytes(zipPath), id, input.Description);
+            File.Delete(zipPath);
+            await _taskFileRepository.InsertAsync(task, true);
+            foreach(TestFile file in files) _testFileRepository.InsertAsync(file, true);
+            Results.Ok();
         }
 
         public async Task DeleteEmptySolutionAsync(Guid id)
