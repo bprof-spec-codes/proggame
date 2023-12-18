@@ -40,7 +40,10 @@ namespace proggame.Services.AppServices
         public async Task DeleteEmptySolutionAsync(Guid id)
         {
             //kitörli a taskot és a testeket is
-            throw new NotImplementedException();
+            _taskFileRepository.DeleteAsync(id);
+            var tests = _testFileRepository.GetDbSet().Where(x => x.TaskId == id).Select(x => x.Id);
+            _testFileRepository.DeleteManyAsync(tests);
+            Results.Ok(id);
         }
 
         public async Task<IEnumerable<TaskFileListDto>> ReadAllAsync()
