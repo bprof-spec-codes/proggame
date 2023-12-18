@@ -46,7 +46,18 @@ namespace proggame.Services.AppServices
         public async Task<IEnumerable<TaskFileListDto>> ReadAllAsync()
         {
             //visszaadja az összes taskot kontent nélkül
-            throw new NotImplementedException();
+            List<TaskFile> list = await _taskFileRepository.GetListAsync();
+            List<TaskFileListDto> result = new List<TaskFileListDto>();
+            foreach (var file in list)
+            {
+                result.Add(new TaskFileListDto()
+                {
+                    Description = file.Description,
+                    Id = file.Id,
+                    Name = file.Name
+                });
+            }
+            return result;
         }
 
         public async Task<TaskFileDto> ReadAsync(Guid id)
